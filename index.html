@@ -66,19 +66,7 @@
       box-shadow: var(--shadow);
     }
     
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
     .logo {
-      height: 40px;
-      max-width: 200px;
-      object-fit: contain;
-    }
-    
-    .logo-text {
       color: white;
       font-size: 1.5rem;
       font-weight: 700;
@@ -258,91 +246,6 @@
     
     button:active {
       transform: translateY(0);
-    }
-    
-    /* Configuration Page Styles */
-    .config-container {
-      background: white;
-      padding: 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .config-section {
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .config-section:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
-    
-    .logo-preview {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-      padding: 1.5rem;
-      border: 2px dashed var(--border);
-      border-radius: var(--radius);
-      background: #f8f9fa;
-    }
-    
-    .logo-preview img {
-      max-height: 80px;
-      max-width: 100%;
-      object-fit: contain;
-    }
-    
-    .logo-actions {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .btn-secondary {
-      background: var(--text-light);
-    }
-    
-    .btn-secondary:hover {
-      background: #5a6268;
-    }
-    
-    .btn-danger {
-      background: var(--danger);
-    }
-    
-    .btn-danger:hover {
-      background: #c82333;
-    }
-    
-    .color-picker {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    
-    .color-option {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 3px solid transparent;
-      transition: transform 0.2s;
-    }
-    
-    .color-option:hover {
-      transform: scale(1.1);
-    }
-    
-    .color-option.active {
-      border-color: var(--text);
     }
     
     /* Photo Upload Styles */
@@ -594,10 +497,6 @@
         width: 80px;
         height: 80px;
       }
-      
-      .logo-actions {
-        flex-direction: column;
-      }
     }
     
     /* Additional Styles for Information Cards */
@@ -635,48 +534,16 @@
       content: " *";
       color: var(--danger);
     }
-    
-    /* Notification Styles */
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 1rem;
-      border-radius: var(--radius);
-      color: white;
-      font-weight: 500;
-      z-index: 1001;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: all 0.3s ease;
-    }
-    
-    .notification.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .notification.success {
-      background-color: var(--accent);
-    }
-    
-    .notification.error {
-      background-color: var(--danger);
-    }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="logo-container">
-      <img id="headerLogo" class="logo" src="" alt="Logo Perusahaan">
-      <div id="headerText" class="logo-text">Sistem Manajemen Scissor Lift</div>
-    </div>
+    <div class="logo">Sistem Manajemen Scissor Lift</div>
     <div class="nav-links">
       <a href="#" class="nav-link active" data-page="landing">Beranda</a>
       <a href="#" class="nav-link" data-page="reserve">Reservasi</a>
       <a href="#" class="nav-link" data-page="historical">Riwayat</a>
-      <a href="#" class="nav-link" data-page="configuration">Konfigurasi</a>
     </div>
   </nav>
 
@@ -698,5 +565,451 @@
           <h3>Riwayat</h3>
           <p>Lihat riwayat reservasi dan penggunaan</p>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reserve Page -->
+  <section id="reserve" class="page">
+    <h1>Reservasi Scissor Lift</h1>
+    
+    <div class="form-container">
+      <form id="pemakaianForm">
+        <h2>Form Pemakaian Scissor Lift</h2>
         
-        <a href="#" class="action-btn"
+        <div class="form-group">
+          <label for="namaOperator" class="required">Nama Operator</label>
+          <input type="text" id="namaOperator" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="unitPemakaian" class="required">Nomor Unit</label>
+          <input type="text" id="unitPemakaian" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="mulaiPemakaian" class="required">Tanggal & Jam Mulai</label>
+          <input type="datetime-local" id="mulaiPemakaian" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="selesaiPemakaian" class="required">Tanggal & Jam Selesai</label>
+          <input type="datetime-local" id="selesaiPemakaian" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="lokasiPemakaian">Lokasi Kerja</label>
+          <input type="text" id="lokasiPemakaian">
+        </div>
+        
+        <div class="form-group">
+          <label>Kondisi Sebelum</label>
+          <div class="photo-upload-container">
+            <div class="photo-upload-box" id="sebelumUpload">
+              <i class="fas fa-camera"></i>
+              <p>Klik untuk menambahkan foto kondisi sebelum</p>
+              <input type="file" id="sebelumInput" accept="image/*" multiple style="display: none;">
+            </div>
+            <div class="photo-preview" id="sebelumPreview"></div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Kondisi Sesudah</label>
+          <div class="photo-upload-container">
+            <div class="photo-upload-box" id="sesudahUpload">
+              <i class="fas fa-camera"></i>
+              <p>Klik untuk menambahkan foto kondisi sesudah</p>
+              <input type="file" id="sesudahInput" accept="image/*" multiple style="display: none;">
+            </div>
+            <div class="photo-preview" id="sesudahPreview"></div>
+          </div>
+        </div>
+        
+        <button type="submit">Simpan Pemakaian</button>
+      </form>
+      
+      <div class="usage-info">
+        <h2>Informasi</h2>
+        <div class="info-card">
+          <h3><i class="fas fa-info-circle"></i> Petunjuk Pengisian</h3>
+          <ul>
+            <li>Isi semua bidang yang wajib diisi (ditandai dengan *)</li>
+            <li>Tambahkan foto kondisi sebelum dan sesudah penggunaan</li>
+            <li>Foto akan membantu dokumentasi kondisi peralatan</li>
+            <li>Catat waktu mulai dan selesai dengan tepat</li>
+            <li>Tentukan lokasi kerja yang jelas</li>
+            <li>Periksa kembali data sebelum menyimpan</li>
+          </ul>
+        </div>
+        
+        <div class="info-card">
+          <h3><i class="fas fa-exclamation-triangle"></i> Panduan Keselamatan</h3>
+          <ul>
+            <li>Selalu inspeksi peralatan sebelum digunakan</li>
+            <li>Gunakan alat pelindung diri (APD) yang sesuai</li>
+            <li>Ikuti instruksi operasi dari pabrikan</li>
+            <li>Laporkan masalah peralatan segera</li>
+            <li>Jangan melebihi kapasitas beban maksimum</li>
+            <li>Pastikan area kerja aman dan stabil</li>
+            <li>Gunakan sistem pengaman dengan benar</li>
+          </ul>
+        </div>
+        
+        <div class="info-card">
+          <h3><i class="fas fa-clipboard-check"></i> Prosedur Operasi</h3>
+          <ul>
+            <li>Lakukan inspeksi visual sebelum penggunaan</li>
+            <li>Pastikan semua kontrol berfungsi dengan baik</li>
+            <li>Uji sistem darurat sebelum operasi</li>
+            <li>Pastikan area kerja bebas dari hambatan</li>
+            <li>Gunakan sistem pengaman saat bekerja di ketinggian</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historical Page -->
+  <section id="historical" class="page">
+    <h1>Data Riwayat</h1>
+    
+    <div class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Tipe Form</th>
+            <th>Nama</th>
+            <th>Unit</th>
+            <th>Mulai</th>
+            <th>Selesai</th>
+            <th>Lokasi</th>
+            <th>Foto</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal for Photo View -->
+  <div id="photoModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Foto Kondisi">
+    </div>
+  </div>
+
+  <script>
+    // Page Navigation
+    document.querySelectorAll('.nav-link, .action-btn').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = this.getAttribute('data-page');
+        
+        // Update active nav link
+        document.querySelectorAll('.nav-link').forEach(nav => {
+          nav.classList.remove('active');
+        });
+        document.querySelector(`.nav-link[data-page="${targetPage}"]`).classList.add('active');
+        
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+        
+        // Show target page
+        document.getElementById(targetPage).classList.add('active');
+      });
+    });
+
+    // Data Management
+    const tableBody = document.querySelector("#dataTable tbody");
+    let savedData = JSON.parse(localStorage.getItem('scissorLiftData')) || [];
+
+    // Photo Upload Functionality
+    const sebelumUpload = document.getElementById('sebelumUpload');
+    const sebelumInput = document.getElementById('sebelumInput');
+    const sebelumPreview = document.getElementById('sebelumPreview');
+    
+    const sesudahUpload = document.getElementById('sesudahUpload');
+    const sesudahInput = document.getElementById('sesudahInput');
+    const sesudahPreview = document.getElementById('sesudahPreview');
+    
+    let sebelumPhotos = [];
+    let sesudahPhotos = [];
+    
+    // Set up photo upload for kondisi sebelum
+    sebelumUpload.addEventListener('click', () => {
+      sebelumInput.click();
+    });
+    
+    sebelumInput.addEventListener('change', (e) => {
+      handlePhotoUpload(e, sebelumPhotos, sebelumPreview);
+    });
+    
+    // Set up photo upload for kondisi sesudah
+    sesudahUpload.addEventListener('click', () => {
+      sesudahInput.click();
+    });
+    
+    sesudahInput.addEventListener('change', (e) => {
+      handlePhotoUpload(e, sesudahPhotos, sesudahPreview);
+    });
+    
+    function handlePhotoUpload(event, photoArray, previewContainer) {
+      const files = event.target.files;
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+            const photoData = {
+              id: Date.now() + i,
+              data: e.target.result
+            };
+            
+            photoArray.push(photoData);
+            renderPhotoPreview(photoData, previewContainer, photoArray);
+          };
+          
+          reader.readAsDataURL(file);
+        }
+      }
+      
+      // Reset the input to allow selecting the same file again
+      event.target.value = '';
+    }
+    
+    function renderPhotoPreview(photoData, previewContainer, photoArray) {
+      const photoItem = document.createElement('div');
+      photoItem.className = 'photo-item';
+      photoItem.innerHTML = `
+        <img src="${photoData.data}" alt="Preview">
+        <button class="remove-photo" data-id="${photoData.id}">&times;</button>
+      `;
+      
+      previewContainer.appendChild(photoItem);
+      
+      // Add event listener to remove button
+      const removeButton = photoItem.querySelector('.remove-photo');
+      removeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = parseInt(e.target.getAttribute('data-id'));
+        const index = photoArray.findIndex(photo => photo.id === id);
+        
+        if (index !== -1) {
+          photoArray.splice(index, 1);
+          photoItem.remove();
+        }
+      });
+    }
+    
+    // Modal functionality
+    const modal = document.getElementById('photoModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+    
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    // Load saved data on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTable();
+    });
+
+    function addRow(type, nama, unit, mulai, selesai, lokasi, sebelumPhotos, sesudahPhotos) {
+      const newEntry = {
+        id: Date.now(), // Unique ID for each entry
+        type,
+        nama,
+        unit,
+        mulai,
+        selesai,
+        lokasi,
+        sebelumPhotos,
+        sesudahPhotos,
+        timestamp: new Date().toISOString()
+      };
+      
+      savedData.push(newEntry);
+      localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
+      renderTable();
+    }
+
+    function deleteRow(id) {
+      if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+        savedData = savedData.filter(entry => entry.id !== id);
+        localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
+        renderTable();
+        showSuccessMessage("Data berhasil dihapus!");
+      }
+    }
+
+    function renderTable() {
+      tableBody.innerHTML = '';
+      
+      if (savedData.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="8" style="text-align: center; padding: 2rem;">Tidak ada data tersimpan</td>`;
+        tableBody.appendChild(row);
+        return;
+      }
+      
+      savedData.forEach(entry => {
+        const row = document.createElement("tr");
+        const statusClass = entry.type === "Reservasi" ? "status-reservasi" : "status-pemakaian";
+        
+        // Create photo gallery for table
+        const allPhotos = [...(entry.sebelumPhotos || []), ...(entry.sesudahPhotos || [])];
+        const photoGallery = document.createElement('div');
+        photoGallery.className = 'photo-gallery';
+        
+        allPhotos.slice(0, 3).forEach(photo => {
+          const thumbnail = document.createElement('img');
+          thumbnail.className = 'photo-thumbnail';
+          thumbnail.src = photo.data;
+          thumbnail.alt = 'Foto Kondisi';
+          thumbnail.addEventListener('click', () => {
+            modalImage.src = photo.data;
+            modal.style.display = 'flex';
+          });
+          photoGallery.appendChild(thumbnail);
+        });
+        
+        if (allPhotos.length > 3) {
+          const moreText = document.createElement('span');
+          moreText.textContent = `+${allPhotos.length - 3} lagi`;
+          moreText.style.fontSize = '0.8rem';
+          moreText.style.color = 'var(--text-light)';
+          photoGallery.appendChild(moreText);
+        }
+        
+        row.innerHTML = `
+          <td><span class="${statusClass}">${entry.type}</span></td>
+          <td>${entry.nama}</td>
+          <td>${entry.unit}</td>
+          <td>${formatDateTime(entry.mulai)}</td>
+          <td>${formatDateTime(entry.selesai)}</td>
+          <td>${entry.lokasi}</td>
+          <td>${allPhotos.length > 0 ? '' : 'Tidak ada foto'}</td>
+          <td class="action-cell">
+            <button class="btn-delete" onclick="deleteRow(${entry.id})">
+              <i class="fas fa-trash"></i> Hapus
+            </button>
+          </td>
+        `;
+        
+        // Add photo gallery to the photo cell
+        if (allPhotos.length > 0) {
+          row.cells[6].innerHTML = '';
+          row.cells[6].appendChild(photoGallery);
+        }
+        
+        tableBody.appendChild(row);
+      });
+    }
+
+    function formatDateTime(dateTimeString) {
+      if (!dateTimeString) return '';
+      
+      const date = new Date(dateTimeString);
+      return date.toLocaleString('id-ID', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    // Form Handling
+    document.getElementById("pemakaianForm").addEventListener("submit", e => {
+      e.preventDefault();
+      
+      // Validate end date is after start date
+      const startDate = new Date(document.getElementById("mulaiPemakaian").value);
+      const endDate = new Date(document.getElementById("selesaiPemakaian").value);
+      
+      if (endDate <= startDate) {
+        alert("Tanggal selesai harus setelah tanggal mulai!");
+        return;
+      }
+      
+      addRow(
+        "Pemakaian",
+        document.getElementById("namaOperator").value,
+        document.getElementById("unitPemakaian").value,
+        document.getElementById("mulaiPemakaian").value,
+        document.getElementById("selesaiPemakaian").value,
+        document.getElementById("lokasiPemakaian").value,
+        sebelumPhotos,
+        sesudahPhotos
+      );
+      
+      // Reset form and photo arrays
+      e.target.reset();
+      sebelumPhotos = [];
+      sesudahPhotos = [];
+      sebelumPreview.innerHTML = '';
+      sesudahPreview.innerHTML = '';
+      
+      // Show success feedback
+      showSuccessMessage("Data pemakaian berhasil disimpan!");
+      
+      // Navigate to historical page
+      document.querySelector('.nav-link[data-page="historical"]').click();
+    });
+
+    function showSuccessMessage(message) {
+      // Create a temporary success message
+      const successMsg = document.createElement('div');
+      successMsg.textContent = message;
+      successMsg.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--accent);
+        color: white;
+        padding: 12px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        z-index: 1000;
+        animation: fadeInOut 3s ease-in-out;
+      `;
+      
+      document.body.appendChild(successMsg);
+      
+      // Remove the message after animation completes
+      setTimeout(() => {
+        if (document.body.contains(successMsg)) {
+          document.body.removeChild(successMsg);
+        }
+      }, 3000);
+    }
+
+    // Add CSS for the fade animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(-20px); }
+        20% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-20px); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
