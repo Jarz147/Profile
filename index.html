@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Scissor Lift</title>
+  <title>Scissor Lift Management System</title>
   <style>
     /* Base Styles */
     :root {
@@ -30,7 +30,7 @@
       line-height: 1.6;
       color: var(--text);
       background-color: #f5f7fa;
-      padding: 20px;
+      padding: 0;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -51,6 +51,117 @@
     h2 {
       font-size: 1.5rem;
       margin-top: 1.5rem;
+    }
+    
+    /* Navigation */
+    .navbar {
+      background-color: var(--primary);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+    
+    .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      transition: background-color 0.3s;
+    }
+    
+    .nav-link:hover {
+      background-color: var(--primary-light);
+    }
+    
+    /* Page Sections */
+    .page {
+      display: none;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .page.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Landing Page */
+    .landing {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    
+    .landing h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      border-bottom: none;
+    }
+    
+    .landing p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 200px;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 1.5rem;
+    }
+    
+    .action-btn:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .action-btn i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .action-btn h3 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .action-btn p {
+      font-size: 0.9rem;
+      color: var(--text-light);
     }
     
     /* Form Styles */
@@ -198,7 +309,29 @@
     /* Responsive adjustments */
     @media (max-width: 768px) {
       body {
-        padding: 10px;
+        padding: 0;
+      }
+      
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        gap: 0.5rem;
+      }
+      
+      .landing {
+        padding: 2rem 1rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .action-btn {
+        width: 100%;
+        max-width: 300px;
       }
       
       .form-container {
@@ -213,127 +346,210 @@
   </style>
 </head>
 <body>
-  <h1>Form Scissor Lift</h1>
-  
-  <div class="form-container">
-    <form id="reservasiForm">
-      <h2>Form Reservasi Scissor Lift</h2>
-      
-      <div class="form-group">
-        <label for="namaReservasi">Nama Peminjam</label>
-        <input type="text" id="namaReservasi" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="departemenReservasi">Departemen</label>
-        <input type="text" id="departemenReservasi">
-      </div>
-      
-      <div class="form-group">
-        <label for="unitReservasi">Nomor Unit</label>
-        <input type="text" id="unitReservasi" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="mulaiReservasi">Tanggal & Jam Mulai</label>
-        <input type="datetime-local" id="mulaiReservasi" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="selesaiReservasi">Tanggal & Jam Selesai</label>
-        <input type="datetime-local" id="selesaiReservasi" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="lokasiReservasi">Lokasi Kerja</label>
-        <input type="text" id="lokasiReservasi">
-      </div>
-      
-      <div class="form-group">
-        <label for="tujuanReservasi">Tujuan Pemakaian</label>
-        <textarea id="tujuanReservasi"></textarea>
-      </div>
-      
-      <button type="submit">Simpan Reservasi</button>
-    </form>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">Scissor Lift Management</div>
+    <div class="nav-links">
+      <a href="#" class="nav-link" data-page="landing">Home</a>
+      <a href="#" class="nav-link" data-page="reserve">Reserve</a>
+      <a href="#" class="nav-link" data-page="historical">Historical</a>
+    </div>
+  </nav>
 
-    <form id="pemakaianForm">
-      <h2>Form Pemakaian Scissor Lift</h2>
+  <!-- Landing Page -->
+  <section id="landing" class="page active">
+    <div class="landing">
+      <h1>Scissor Lift Management System</h1>
+      <p>Manage your scissor lift reservations and track usage history with our comprehensive system</p>
       
-      <div class="form-group">
-        <label for="namaOperator">Nama Operator</label>
-        <input type="text" id="namaOperator" required>
+      <div class="action-buttons">
+        <a href="#" class="action-btn" data-page="reserve">
+          <i>📋</i>
+          <h3>Reserve</h3>
+          <p>Make a new scissor lift reservation</p>
+        </a>
+        
+        <a href="#" class="action-btn" data-page="historical">
+          <i>📊</i>
+          <h3>Historical</h3>
+          <p>View reservation and usage history</p>
+        </a>
       </div>
-      
-      <div class="form-group">
-        <label for="unitPemakaian">Nomor Unit</label>
-        <input type="text" id="unitPemakaian" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="mulaiPemakaian">Tanggal & Jam Mulai</label>
-        <input type="datetime-local" id="mulaiPemakaian" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="selesaiPemakaian">Tanggal & Jam Selesai</label>
-        <input type="datetime-local" id="selesaiPemakaian" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="lokasiPemakaian">Lokasi Kerja</label>
-        <input type="text" id="lokasiPemakaian">
-      </div>
-      
-      <div class="form-group">
-        <label for="kondisiSebelum">Kondisi Sebelum</label>
-        <textarea id="kondisiSebelum"></textarea>
-      </div>
-      
-      <div class="form-group">
-        <label for="kondisiSesudah">Kondisi Sesudah</label>
-        <textarea id="kondisiSesudah"></textarea>
-      </div>
-      
-      <button type="submit">Simpan Pemakaian</button>
-    </form>
-  </div>
+    </div>
+  </section>
 
-  <div class="table-container">
-    <h2>Data Tersimpan</h2>
-    <table id="dataTable">
-      <thead>
-        <tr>
-          <th>Tipe Form</th>
-          <th>Nama</th>
-          <th>Unit</th>
-          <th>Mulai</th>
-          <th>Selesai</th>
-          <th>Lokasi</th>
-          <th>Keterangan</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+  <!-- Reserve Page -->
+  <section id="reserve" class="page">
+    <h1>Reserve Scissor Lift</h1>
+    
+    <div class="form-container">
+      <form id="reservasiForm">
+        <h2>Form Reservasi Scissor Lift</h2>
+        
+        <div class="form-group">
+          <label for="namaReservasi">Nama Peminjam</label>
+          <input type="text" id="namaReservasi" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="departemenReservasi">Departemen</label>
+          <input type="text" id="departemenReservasi">
+        </div>
+        
+        <div class="form-group">
+          <label for="unitReservasi">Nomor Unit</label>
+          <input type="text" id="unitReservasi" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="mulaiReservasi">Tanggal & Jam Mulai</label>
+          <input type="datetime-local" id="mulaiReservasi" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="selesaiReservasi">Tanggal & Jam Selesai</label>
+          <input type="datetime-local" id="selesaiReservasi" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="lokasiReservasi">Lokasi Kerja</label>
+          <input type="text" id="lokasiReservasi">
+        </div>
+        
+        <div class="form-group">
+          <label for="tujuanReservasi">Tujuan Pemakaian</label>
+          <textarea id="tujuanReservasi"></textarea>
+        </div>
+        
+        <button type="submit">Simpan Reservasi</button>
+      </form>
+
+      <form id="pemakaianForm">
+        <h2>Form Pemakaian Scissor Lift</h2>
+        
+        <div class="form-group">
+          <label for="namaOperator">Nama Operator</label>
+          <input type="text" id="namaOperator" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="unitPemakaian">Nomor Unit</label>
+          <input type="text" id="unitPemakaian" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="mulaiPemakaian">Tanggal & Jam Mulai</label>
+          <input type="datetime-local" id="mulaiPemakaian" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="selesaiPemakaian">Tanggal & Jam Selesai</label>
+          <input type="datetime-local" id="selesaiPemakaian" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="lokasiPemakaian">Lokasi Kerja</label>
+          <input type="text" id="lokasiPemakaian">
+        </div>
+        
+        <div class="form-group">
+          <label for="kondisiSebelum">Kondisi Sebelum</label>
+          <textarea id="kondisiSebelum"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="kondisiSesudah">Kondisi Sesudah</label>
+          <textarea id="kondisiSesudah"></textarea>
+        </div>
+        
+        <button type="submit">Simpan Pemakaian</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Historical Page -->
+  <section id="historical" class="page">
+    <h1>Historical Data</h1>
+    
+    <div class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Tipe Form</th>
+            <th>Nama</th>
+            <th>Unit</th>
+            <th>Mulai</th>
+            <th>Selesai</th>
+            <th>Lokasi</th>
+            <th>Keterangan</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
 
   <script>
+    // Page Navigation
+    document.querySelectorAll('.nav-link, .action-btn').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = this.getAttribute('data-page');
+        
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+        
+        // Show target page
+        document.getElementById(targetPage).classList.add('active');
+      });
+    });
+
+    // Data Management
     const tableBody = document.querySelector("#dataTable tbody");
+    let savedData = JSON.parse(localStorage.getItem('scissorLiftData')) || [];
+
+    // Load saved data on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTable();
+    });
 
     function addRow(type, nama, unit, mulai, selesai, lokasi, ket) {
-      const row = document.createElement("tr");
-      const statusClass = type === "Reservasi" ? "status-reservasi" : "status-pemakaian";
+      const newEntry = {
+        type,
+        nama,
+        unit,
+        mulai,
+        selesai,
+        lokasi,
+        ket,
+        timestamp: new Date().toISOString()
+      };
       
-      row.innerHTML = `
-        <td><span class="${statusClass}">${type}</span></td>
-        <td>${nama}</td>
-        <td>${unit}</td>
-        <td>${formatDateTime(mulai)}</td>
-        <td>${formatDateTime(selesai)}</td>
-        <td>${lokasi}</td>
-        <td>${ket}</td>
-      `;
-      tableBody.appendChild(row);
+      savedData.push(newEntry);
+      localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
+      renderTable();
+    }
+
+    function renderTable() {
+      tableBody.innerHTML = '';
+      
+      savedData.forEach(entry => {
+        const row = document.createElement("tr");
+        const statusClass = entry.type === "Reservasi" ? "status-reservasi" : "status-pemakaian";
+        
+        row.innerHTML = `
+          <td><span class="${statusClass}">${entry.type}</span></td>
+          <td>${entry.nama}</td>
+          <td>${entry.unit}</td>
+          <td>${formatDateTime(entry.mulai)}</td>
+          <td>${formatDateTime(entry.selesai)}</td>
+          <td>${entry.lokasi}</td>
+          <td>${entry.ket}</td>
+        `;
+        tableBody.appendChild(row);
+      });
     }
 
     function formatDateTime(dateTimeString) {
@@ -349,6 +565,7 @@
       });
     }
 
+    // Form Handling
     document.getElementById("reservasiForm").addEventListener("submit", e => {
       e.preventDefault();
       addRow(
@@ -404,7 +621,9 @@
       
       // Remove the message after animation completes
       setTimeout(() => {
-        document.body.removeChild(successMsg);
+        if (document.body.contains(successMsg)) {
+          document.body.removeChild(successMsg);
+        }
       }, 3000);
     }
 
